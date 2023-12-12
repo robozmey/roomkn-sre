@@ -43,6 +43,18 @@ services:
     labels:
       prometheus-job: "prometheus"
 
+  roomkn-alertmanager:
+    image: quay.io/prometheus/alertmanager
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alertmanager_data:/alertmanager/data
+    command: 
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    ports:
+      - 9093:9093
+    networks:
+      - back-tier
+
   roomkn-blackbox:
     image: prom/blackbox-exporter
     ports:

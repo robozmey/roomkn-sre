@@ -1,0 +1,29 @@
+groups:
+- name: blackbox
+  rules:
+  - alert: BlackboxProbeFailed
+    expr: probe_success == 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Blackbox probe failed (instance {{ $labels.instance }})
+      description: "Probe failed\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"
+  - alert: BlackboxProbeHttpFailed
+    expr: probe_http_status_code <= 199 OR probe_http_status_code >= 400
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Blackbox probe HTTP failed (instance {{ $labels.instance }})
+      description: "HTTP status code not in 200-399\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"
+- name: node_exporter
+  rules:
+  - alert: HostHighCpuLoad
+    expr: (sum by (instance) (avg by (mode, instance) (rate(node_cpu_seconds_total{mode!="idle"}[2m]))) > 0.8) * on(instance) group_left(nodename) node_uname_infor{nodename=~".+"}
+    for: 1s
+    labels:
+      severity: warning
+    annotations:
+      summary: Host high CPU load (instance {{ $labels.instance }})
+      description: "CPU load is > 80%\n VALUE = {{ $value }}\n LABELS = {{ $labels }}"

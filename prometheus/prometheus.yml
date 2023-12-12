@@ -31,3 +31,11 @@ scrape_configs:
       target_label: instance
     - target_label: __address__
       replacement: roomkn-blackbox:9115
+
+rule_files:
+  - rules.yml
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: [roomkn-alertmanager:9093]
