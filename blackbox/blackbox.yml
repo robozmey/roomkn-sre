@@ -1,0 +1,12 @@
+modules:
+  http_probe:
+    prober: http
+    http:
+      tls_config:
+        insecure_skip_verify: false
+      preferred_ip_protocol: "ip4" # defaults to "ip6"
+  tcp_probe:
+    prober: tcp
+    timeout: 5s
+  icmp_probe:
+    prober: icmp
