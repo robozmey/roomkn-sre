@@ -5,14 +5,14 @@ global:
 receivers:
 - name: telegram_critical
   telegram_configs:
-    - chat_id: 0
-      bot_token: "111"
+    - chat_id: -1
+      bot_token: "1"
       api_url: "https://api.telegram.org"
       send_resolved: true
 - name: telegram_warning
   telegram_configs:
-    - chat_id: 0
-      bot_token: "111"
+    - chat_id: -1
+      bot_token: "1"
       api_url: "https://api.telegram.org"
       send_resolved: true
   
