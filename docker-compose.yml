@@ -10,6 +10,18 @@ networks:
 
 services:
 
+  roomkn-nginx:
+    image: nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certs/:/etc/certs/
+    networks:
+      - iris
+    labels:
+      co.elastic.logs/enabled: "true" 
+
   roomkn-grafana:
     image: grafana/grafana-enterprise
     restart: unless-stopped
