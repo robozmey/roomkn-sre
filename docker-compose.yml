@@ -78,3 +78,12 @@ services:
     networks:
     - iris
 
+  roomkn-nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:1.0.0
+    # container_name: roomkn-nginx-exporter
+    command:
+      - '--nginx.scrape-uri=https://roomkn-nginx/nginx_status'
+    ports:
+      - 9113:9113
+    networks:
+      - iris
