@@ -35,7 +35,7 @@ scrape_configs:
       target_label: instance
     - target_label: __address__
       replacement: roomkn-blackbox:9115
-  - job_name: 'blackbox_exporter_http'
+  - job_name: 'blackbox_exporter_https'
     scrape_interval: 10s
     metrics_path: /probe
     params:
